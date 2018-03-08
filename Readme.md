@@ -1,5 +1,5 @@
-#PHP input class
-##Feature
+# PHP input class
+## Feature
 
  1. Supported method get,post,put,PATCH
  2. Clean input method
@@ -7,7 +7,7 @@
  4. Wordwrap
  5. check whether form submit or not
 
-##TODO
+## TODO
 Add method for emojies convertor
 
 
