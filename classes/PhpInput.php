@@ -70,14 +70,6 @@ class PhpInput
 
 						$string = $json_decode_data;
 
-					}elseif($this->method === 'PATCH'){
-
-						$data = file_get_contents('php://input');
-
-						$json_decode_data = json_decode($data,true);
-
-						$string = $json_decode_data;
-
 					}else{
 
 						if(isset($_REQUEST[$params['name']])){
