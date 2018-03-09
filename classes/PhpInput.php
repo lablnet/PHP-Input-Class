@@ -13,8 +13,23 @@ class PhpInput
 
 	public function WordWrapEnable($str){
 
-		return wordwrap($str, $width, '<br />\n');
+		if(is_array($params)){
 
+			if(!empty($params['str']) && !empty($params['width']) &&  $params['width'] >= 1 ){
+
+				return wordwrap($params['str'], $params['width'], '<br />\n');
+
+			}else{
+
+				return false;
+
+			}
+
+		}else{
+
+			return false;
+
+		}
 	}
 
 	public function IsFromSubmit($name){
@@ -110,6 +125,31 @@ class PhpInput
 			return false; 
 		}
 	}
+
+
+public function RLineBreaks($params) {
+	
+	if(is_array($params)){
+
+		if(isset($params['str']) and strlen($params['str']) !== 0){
+		
+			$result =  str_replace(PHP_EOL, "\n\r<br />\n\r", $params['str']);
+
+			return $result;
+
+		}else{
+
+			return false;
+
+		}
+
+	}else{
+
+		return false;
+
+	}
+
+}
 
 	public function IsAjax(){
 

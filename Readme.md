@@ -6,11 +6,13 @@
  3. check whether request is ajax or not
  4. Wordwrap
  5. check whether form submit or not
+ 6. Restore line breaks method
 
 ## TODO
 Add method for emojies convertor
 
-# Congiguration
+# Simple Example 
+## for more detail see index.php
     <?php 
         require_once 'init.php';
         echo input('q');
