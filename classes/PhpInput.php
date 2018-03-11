@@ -5,12 +5,19 @@ class PhpInput
 {
 
 	private $method;
-
+	 /**
+	 * __construct
+	 */	 
 	public function __construct() {
 
 		$this->method =  $_SERVER['REQUEST_METHOD'];
 	}
-
+	 /**
+	 * Wordwrap
+	 * @param  $str Str to be wordwraped
+	 *
+	 * @return string | boolean
+	 */	 
 	public function WordWrapEnable($str){
 
 		if(is_array($params)){
@@ -31,7 +38,12 @@ class PhpInput
 
 		}
 	}
-
+	 /**
+	 * Check form sbumit or not
+	 * @param  $name => name of submit button/ field
+	 *
+	 * @return boolean
+	 */	 
 	public function IsFromSubmit($name){
 
 			if(isset($_REQUEST[$name])){
@@ -45,7 +57,15 @@ class PhpInput
 			}
 
 	}
-
+	 /**
+	 * Accpet input
+	 * Support get.post,put
+	 *
+	 * @param  $params 
+	 * 'name' => name of filed (required in get,post request)
+	 *
+	 * @return string | boolean
+	 */	 
 	public function Input ( $params ) {
 
 		if(is_array($params)){
@@ -97,7 +117,15 @@ class PhpInput
 		}
 
 	}
-
+	 /**
+	 * Clean input
+	 *
+	 * @param  $params 
+	 * 'input' => string 
+	 * 'type' => secured , root
+	 *
+	 * @return string | boolean
+	 */	 
 	public function CleanInput($params){
 		if(is_array($params)){
 			if(!empty($params['input'])){
@@ -118,16 +146,29 @@ class PhpInput
 		}
 	}
 
-
-public function RLineBreaks($params) {
-	
-	if(is_array($params)){
-
-		if(isset($params['str']) and strlen($params['str']) !== 0){
+	 /**
+	 * Restore new lines
+	 *
+	 * @param  $params 
+	 * 'str' => string that tobe restored new lines
+	 *
+	 * @return string | boolean
+	 */	 
+	public function RestoreLineBreaks($params) {
 		
-			$result =  str_replace(PHP_EOL, "\n\r<br />\n\r", $params['str']);
+		if(is_array($params)){
 
-			return $result;
+			if(isset($params['str']) and strlen($params['str']) !== 0){
+			
+				$result =  str_replace(PHP_EOL, "\n\r<br />\n\r", $params['str']);
+
+				return $result;
+
+			}else{
+
+				return false;
+
+			}
 
 		}else{
 
@@ -135,14 +176,12 @@ public function RLineBreaks($params) {
 
 		}
 
-	}else{
-
-		return false;
-
 	}
-
-}
-
+	 /**
+	 * Check request ajax or not
+	 *
+	 * @return string | boolean
+	 */	 
 	public function IsAjax(){
 
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest'){
