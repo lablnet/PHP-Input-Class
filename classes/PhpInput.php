@@ -1,5 +1,13 @@
 <?php
-
+	/**
+	 * PHP input request handler class
+	 *
+	 * @author   Malik Umer Farooq <lablnet01@gmail.com>
+	 * @author-profile https://www.facebook.com/malikumerfarooq01/
+	 * @license MIT 
+	 * @link    https://github.com/Lablnet/PHP-Input-Class
+	 *
+	 */
 class PhpInput
 
 {
