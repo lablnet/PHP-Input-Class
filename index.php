@@ -1,7 +1,9 @@
 <?php 
 require_once 'init.php';
 if(is_submit('submit')){
-	echo '<div class="container">'. restore_new_lines(input('q')) . '</div>';
+  if(input('q')){
+	   echo '<div class="container">'. restore_new_lines(input('q')) . '</div>';
+  }
 }
 ?>
 <head>

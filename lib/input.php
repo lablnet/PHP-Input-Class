@@ -53,5 +53,7 @@ function is_submit($name){
 	 * @return string
 	 */
 function restore_new_lines($str){
+
 	return object()->RestoreLineBreaks(['str'=>$str]);
+
 }

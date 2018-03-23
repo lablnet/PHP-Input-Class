@@ -108,9 +108,13 @@ class PhpInput
 
 					}
 
-					if(isset($string)){
+					if(isset($string) && !empty($string)){
 
 						return $string;
+
+					}else{
+
+						return false;
 
 					}
 
@@ -153,7 +157,6 @@ class PhpInput
 			return false; 
 		}
 	}
-
 	 /**
 	 * Restore new lines
 	 *
