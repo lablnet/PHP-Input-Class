@@ -8,29 +8,23 @@
 	 * @link    https://github.com/Lablnet/PHP-Input-Class
 	 *
 	 */
-class PhpInput
+class InPut
 
 {
 
-	private $method;
-	 /**
-	 * __construct
-	 */	 
-	public function __construct() {
+	private static $method;
 
-		$this->method =  $_SERVER['REQUEST_METHOD'];
-	}
+	public function __construct(){}
+	
 	 /**
 	 * Wordwrap
 	 * @param  $str Str to be wordwraped
 	 *
 	 * @return string | boolean
 	 */	 
-	public function WordWrapEnable($str){
+	public static function WordWrapEnable($str,$width){
 
-		if(is_array($params)){
-
-			if(!empty($params['str']) && !empty($params['width']) &&  $params['width'] >= 1 ){
+			if(!empty($str) && !empty($width) &&  $width >= 1 ){
 
 				return wordwrap($params['str'], $params['width'], '<br />\n');
 
@@ -40,11 +34,6 @@ class PhpInput
 
 			}
 
-		}else{
-
-			return false;
-
-		}
 	}
 	 /**
 	 * Check form sbumit or not
@@ -52,7 +41,7 @@ class PhpInput
 	 *
 	 * @return boolean
 	 */	 
-	public function IsFromSubmit($name){
+	public static function IsFromSubmit($name){
 
 			if(isset($_REQUEST[$name])){
 
@@ -74,35 +63,39 @@ class PhpInput
 	 *
 	 * @return string | boolean
 	 */	 
-	public function Input ( $params ) {
+	public static function Input ( $key ) {
 
-		if(is_array($params)){
+			InPut::$method =  $_SERVER['REQUEST_METHOD'];
 
-			if(isset($this->method) && !empty($this->method)){
+			if(isset(InPut::$method) && !empty(InPut::$method)){
 
-				if(isset($params['name']) && !empty($params['name'])){
+				if(isset($key) && !empty($key)){
 
-					if($this->method === 'POST' && isset($_POST[$params['name']])){
+					if(InPut::$method === 'POST' && isset($_POST[$key])){
 
-						$string = $_POST[$params['name']];
+						$string = $_POST["$key"];
 
-					}elseif($this->method === 'GET' && isset($_GET[$params['name']])){
+					}elseif(InPut::$method === 'GET' && isset($_GET[$key])){
 
-						$string = $_GET[$params['name']];
+						$string = $_GET[$key];
 
-					}elseif($this->method === 'PUT'){
+					}elseif(InPut::$method === 'PUT'){
 
-						$data = file_get_contents('php://input');
+						 parse_str(file_get_contents('php://input'), $_PUT);
 
-						$json_decode_data = json_decode($data,true);
+						$string = $_PUT[$key];
 
-						$string = $json_decode_data;
+					}elseif(InPut::$method === 'DELETE'){
+
+						parse_str(file_get_contents('php://input'), $_DEL);
+
+						$string = $_DEL[$key];
 
 					}else{
 
-						if(isset($_REQUEST[$params['name']])){
+						if(isset($_REQUEST[$key])){
 
-							$string = $_REQUEST[$params['name']];
+							$string = $_REQUEST[$key];
 
 						}
 
@@ -122,12 +115,6 @@ class PhpInput
 
 			}
 
-		}else{
-
-			return false;
-
-		}
-
 	}
 	 /**
 	 * Clean input
@@ -138,24 +125,28 @@ class PhpInput
 	 *
 	 * @return string | boolean
 	 */	 
-	public function CleanInput($params){
-		if(is_array($params)){
-			if(!empty($params['input'])){
-				if(!empty($params['type'])){
-					if($params['type'] === 'secured'){
-				        return  stripslashes(trim(htmlspecialchars($params['input'])));
-					}elseif($params['type'] === 'root'){
-						return  stripslashes(trim(htmlspecialchars(strip_tags($params['input']))));
+	public static function Cleane($input,$type){
+
+			if(!empty($input)){
+
+				if(!empty($type)){
+
+					if($type === 'secured'){
+
+				        return  stripslashes(trim(htmlspecialchars(htmlspecialchars($params['input'],ENT_HTML5),ENT_QUOTES)));
+
+					}elseif($type === 'root'){
+
+						return  stripslashes(trim(htmlspecialchars(htmlspecialchars(strip_tags($params['input']),ENT_HTML5),ENT_QUOTES)));
+
 					}
+
 				}else{
 					return false;
 				}
 			}else{
 				return false;
 			}
-		}else{
-			return false; 
-		}
 	}
 	 /**
 	 * Restore new lines
@@ -165,11 +156,9 @@ class PhpInput
 	 *
 	 * @return string | boolean
 	 */	 
-	public function RestoreLineBreaks($params) {
-		
-		if(is_array($params)){
+	public static function RestoreLineBreaks($str) {
 
-			if(isset($params['str']) and strlen($params['str']) !== 0){
+			if(isset($str) and strlen($str) !== 0){
 			
 				$result =  str_replace(PHP_EOL, "\n\r<br />\n\r", $params['str']);
 
@@ -181,19 +170,13 @@ class PhpInput
 
 			}
 
-		}else{
-
-			return false;
-
-		}
-
 	}
 	 /**
 	 * Check request ajax or not
 	 *
 	 * @return string | boolean
 	 */	 
-	public function IsAjax(){
+	public static function IsAjax(){
 
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest'){
 

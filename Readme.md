@@ -22,7 +22,7 @@ Add method for emojies convertor
 ## for more detail see index.php
     <?php 
         require_once 'init.php';
-        echo input('q');
+        echo InPut::Input('q');
      ?>
      <form action='' method='post'> 
         	<input type='text' name='q' ?>

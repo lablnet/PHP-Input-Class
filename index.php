@@ -1,8 +1,8 @@
 <?php 
 require_once 'init.php';
-if(is_submit('submit')){
-  if(input('q')){
-	   echo '<div class="container">'. restore_new_lines(input('q')) . '</div>';
+if(InPut::IsFromSubmit('submit')){
+  if(InPut::Input('q')){
+	   echo '<div class="container">'. InPut::Input('q') . '</div>';
   }
 }
 ?>
@@ -16,7 +16,7 @@ if(is_submit('submit')){
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <div class="container">
-  <form>
+  <form method="post">
     <div class="form-group">
       <label for="comment">Comment:</label>
       <textarea class="form-control" rows="5" name='q'></textarea>
