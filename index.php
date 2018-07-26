@@ -1,9 +1,9 @@
 <?php 
 require_once 'init.php';
-if(InPut::IsFromSubmit('submit')){
-  if(InPut::Input('q')){
-	   echo '<div class="container">'. InPut::Input('q') . '</div>';
-  }
+if (InPut::IsFromSubmit('submit')) {
+    if (InPut::Input('q')) {
+        echo '<div class="container">'.InPut::Input('q').'</div>';
+    }
 }
 ?>
 <head>
