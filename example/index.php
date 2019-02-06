@@ -1,8 +1,12 @@
 <?php 
-require_once 'init.php';
-if (InPut::IsFromSubmit('submit')) {
-    if (InPut::Input('q')) {
-        echo '<div class="container">'.InPut::Input('q').'</div>';
+require_once "../vendor/autoload.php";
+if (input('submit')) {
+	
+	//Check whether the request ajax/xhr?
+	//var_dump(is_ajax());
+	//echo "<br>";
+    if (input('q')) {
+        echo '<div class="container">'.input('q').'</div>';
     }
 }
 ?>

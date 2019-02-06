@@ -1,0 +1,22 @@
+{
+    "name": "lablnet/input",
+    "description": "PHP input package.",
+    "keywords": ["php", "input","request","free","package","Lablnet"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Malik Umer Farooq",
+            "email":"lablnet01@gmail.com",
+            "homepage": "https://softhub99.com"
+        }
+    ],  
+    "autoload": {
+        "psr-4": {
+             "Lablnet\\": "src/"
+        },
+		"files":["src/functions/helpers.php"]
+    },
+    "require":{
+    	"lablnet/http-client": "^1.0"
+    }	
+}
